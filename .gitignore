@@ -1,0 +1,5 @@
+.idea/
+djangoenv/
+urbanshop/db.sqlite3
+urbanshop/__pycache__/
+*.pyc
