@@ -32,22 +32,22 @@ def sales(request, format=None):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class CategoryDetails(generics.RetrieveUpdateDestroyAPIView):
+class CategoryDetails(generics.RetrieveAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
-class Categories(generics.ListCreateAPIView):
+class Categories(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProductDetail(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class Products(generics.ListCreateAPIView):
+class Products(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
