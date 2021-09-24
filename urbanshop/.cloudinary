@@ -1,0 +1,4 @@
+export CLOUD_NAME = dwdonzmlv 
+export API_KEY = 538748534973935 
+export API_SECRET = DueEoCnoHo1GQ3auRzPvAjY1Npo
+export CLOUDINARY_URL=cloudinary://538748534973935:DueEoCnoHo1GQ3auRzPvAjY1Npo@dwdonzmlv

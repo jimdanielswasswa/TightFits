@@ -1,5 +1,12 @@
 from django.db import models
+from django.db.models.fields.reverse_related import OneToOneRel
+from cloudinary.models import CloudinaryField
 
+class Image(models.Model):
+    image = CloudinaryField('image', null=True, format="jpg")
+    tag = models.CharField(max_length=50, null=False, default='')
+    def __str__(self):
+        return f"{self.tag} : {self.id}"
 
 class Size(models.Model):
     size = models.CharField(max_length=40, blank=False)
@@ -11,6 +18,7 @@ class Size(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=20, blank=False)
     description = models.CharField(max_length=200, blank=False)
+    image = CloudinaryField('image', null=True, format='jpeg', blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(blank=True)
 
@@ -24,12 +32,13 @@ class Product(models.Model):
     price = models.IntegerField(blank=False)
     categories = models.ManyToManyField(to=Category, related_name='categories')
     size = models.ForeignKey(to=Size, on_delete=models.DO_NOTHING, null=True)
+    image = CloudinaryField('image', null=True, format="jpg")
+    images = models.ManyToManyField(to=Image, related_name='images')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(blank=True)
 
     def __str__(self):
         return f"{self.name} : {self.id}"
-
 
 class Sale(models.Model):
     product = models.OneToOneField(

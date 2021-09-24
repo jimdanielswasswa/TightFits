@@ -4,9 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from .models import Cart, Category, Customer, Order, OrderItem, Product, Sale, Size, Transaction, WishList
+from .models import Cart, Category, Customer, Image, Order, OrderItem, Product, Sale, Size, Transaction, WishList
 from .serializers import (CartSerializer, CategorySerializer,
-                          CustomerSerializer, OrderItemSerializer, OrderSerializer, ProductSerializer,
+                          CustomerSerializer, ImageSerializer, OrderItemSerializer, OrderSerializer, ProductSerializer,
                           SaleSerializer, SizeSerializer, TransactionSerializer, WishListSerializer)
 
 
@@ -14,8 +14,8 @@ from .serializers import (CartSerializer, CategorySerializer,
 def index(request, format=None):
     if request.method == 'GET':
         sales = Sale.objects.all()
-        serializer = SaleSerializer(sales, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        salesSerializer = SaleSerializer(sales, many=True)
+        return Response({ 'sales': salesSerializer.data }, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -31,6 +31,11 @@ def sales(request, format=None):
     serializer = SaleSerializer(sales, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def images(request, format=None):
+    images = Image.objects.all()
+    imageSerializer = ImageSerializer(images, many=True)
+    return Response(imageSerializer.data, status=status.HTTP_200_OK)
 
 class CategoryDetails(generics.RetrieveAPIView):
     queryset = Category.objects.all()
@@ -43,7 +48,7 @@ class Categories(generics.ListAPIView):
 
 
 class ProductDetail(generics.RetrieveAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.prefetch_related('images').all()
     serializer_class = ProductSerializer
 
 

@@ -1,5 +1,6 @@
+from django.db.models import fields
 from rest_framework import serializers
-from .models import Size, Category, Product, Sale, Customer, Order, OrderItem, Transaction, Cart, WishList
+from .models import Image, Size, Category, Product, Sale, Customer, Order, OrderItem, Transaction, Cart, WishList
 
 
 class SizeSerializer(serializers.ModelSerializer):
@@ -11,14 +12,15 @@ class SizeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description']
+        fields = ['id', 'name', 'description', 'image']
 
 
 class ProductSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(many = True, queryset=Category.objects.all())
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'size', 'categories']
+        ordering = ['-id']
+        fields = ['id', 'name', 'description', 'price', 'size', 'categories', 'image', 'images']
 
 
 class SaleSerializer(serializers.ModelSerializer):
@@ -50,22 +52,27 @@ class OrderItemSerializer(serializers.ModelSerializer):
                   'quantity', 'unit_price', 'shipping_date']
 
 
-class TransactionSerializer(serializers.Serializer):
+class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['id', 'order', 'type', 'amount', 'response_code',
                   'response_reason', 'response', 'transaction_id', 'created_at']
 
 
-class CartSerializer(serializers.Serializer):
+class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['id', 'user_session_id', 'product',
                   'quantity', 'created_at', 'updated_at']
 
 
-class WishListSerializer(serializers.Serializer):
+class WishListSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
         fields = ['id', 'user_session_id', 'product',
                   'quantity', 'created_at', 'updated_at']
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = [ 'id', 'image', 'tag' ]

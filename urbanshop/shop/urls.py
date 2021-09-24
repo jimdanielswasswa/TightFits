@@ -1,7 +1,7 @@
 from django.shortcuts import resolve_url
 from django.urls import path
 from .views import (CartDetails, Carts, CategoryDetails, Categories, CustomerDetails, Customers, OrderDetails, OrderItemDetails, OrderItems, Orders,
-                    TransactionDetails, Transactions, WishListDetails, WishLists, index, ProductDetail, Products, sales, sizes)
+                    TransactionDetails, Transactions, WishListDetails, WishLists, images, index, ProductDetail, Products, sales, sizes)
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path(route='carts/', view=Carts.as_view(), name='carts'),
     path(route='wishlists/<int:pk>', view=WishListDetails.as_view(), name='wishlist'),
     path(route='wishlists/', view=WishLists.as_view(), name='wishlist'),
+    path(route='images/', view=images, name='images'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
