@@ -1,1 +1,1 @@
-web: gunicorn wsgi.py --pythonpath=urbanshop --log-file -
+web: gunicorn urbanshop.wsgi --pythonpath=urbanshop --log-file
