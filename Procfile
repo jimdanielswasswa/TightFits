@@ -1,0 +1,1 @@
+web: gunicorn wsgi.py --pythonpath=urbanshop --log-file -
