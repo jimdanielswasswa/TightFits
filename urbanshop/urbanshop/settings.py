@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tightfits.herokuapp.com']
 
 
 # Application definition
