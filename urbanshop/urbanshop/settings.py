@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+import django_heroku
 
 import cloudinary
 import cloudinary.uploader
@@ -24,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$'
+# SECRET_KEY = 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +46,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'cloudinary',
-    'herokuapp',
     'shop.apps.ShopConfig',
 ]
 
@@ -153,3 +154,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
