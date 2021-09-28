@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-import django_heroku
 
 import cloudinary
 import cloudinary.uploader
@@ -26,12 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$')
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY', 'django-insecure-epl!casx*=(g(-0$i2u_evkt-)wj&i(8r))b08jd2*=_d%gh^$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tightfits.herokuapp.com']
+ALLOWED_HOSTS = ['tightfits.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -89,10 +89,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50
 }
 
-cloudinary.config( 
-  cloud_name = "dwdonzmlv", 
-  api_key = "538748534973935", 
-  api_secret = "DueEoCnoHo1GQ3auRzPvAjY1Npo" 
+cloudinary.config(
+    cloud_name="dwdonzmlv",
+    api_key="538748534973935",
+    api_secret="DueEoCnoHo1GQ3auRzPvAjY1Npo"
 )
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -106,10 +106,19 @@ WSGI_APPLICATION = 'urbanshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'tightfits_db',
+        'HOST': '127.0.0.1',
+        'PORT': 27017,
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -154,5 +163,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-django_heroku.settings(locals())
