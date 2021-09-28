@@ -108,7 +108,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'tightfits_db',
-        'ENFORCE_SCHEMA': False,
+        'ENFORCE_SCHEMA': True,
         'CLIENT': {
             'host': os.environ.get('MONGODB_URI', '127.0.0.1'),
             'username': os.environ.get('DB_USER'),
