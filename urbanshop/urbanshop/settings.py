@@ -107,15 +107,21 @@ WSGI_APPLICATION = 'urbanshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        "CLIENT": {
-            'NAME': 'tightfits_db',
-            'HOST': os.environ.get('MONGODB_URI', '127.0.0.1'),
-            'USER': os.environ.get('DB_USER'),
-            'PASSWORD': os.environ.get('DB_PASSWORD'),
-            "authMechanism": "SCRAM-SHA-1",
+        'NAME': 'tightfits_db',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': os.environ.get('MONGODB_URI', '127.0.0.1'),
+            'username': os.environ.get('DB_USER'),
+            'password': os.environ.get('DB_PASSWORD'),
+            'authSource': 'tightfits_db',
+            'authMechanism': 'SCRAM-SHA-1'
         },
     }
 }
+# 'HOST': os.environ.get('MONGODB_URI', '127.0.0.1'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'ENFORCE_SCHEMA': False,
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'djongo',
