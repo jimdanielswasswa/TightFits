@@ -108,10 +108,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'tightfits_db',
-        'HOST': '127.0.0.1',
-        'PORT': 27017,
+        'HOST': os.environ.get('MONGODB_URI', '127.0.0.1'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'tightfits_db',
+#         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+#         'PORT': 27017,
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
