@@ -118,12 +118,12 @@ DATABASES = {
                 }
             },
          },
-        'NAME': 'tightfits_db',
+        'NAME': 'tightfits-db',
         'CLIENT': {
-            'host': os.environ.get('MONGODB_URI', '127.0.0.1'),
+            'host': os.environ.get('MONGODB_URI'),
             'username': os.environ.get('DB_USER'),
             'password': os.environ.get('DB_PASSWORD'),
-            'authSource': 'tightfits_db',
+            'authSource': 'tightfits-db',
             'authMechanism': 'SCRAM-SHA-1',
         }
     }
