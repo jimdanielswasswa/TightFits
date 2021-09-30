@@ -6,13 +6,13 @@ class Image(models.Model):
     image = CloudinaryField('image', null=True, format="jpg")
     tag = models.CharField(max_length=50, null=False, default='')
     def __str__(self):
-        return f"{self.tag} : {self.id}"
+        return f"{self.tag} : {self._id}"
 
 class Size(models.Model):
     size = models.CharField(max_length=40, blank=False)
 
     def __str__(self):
-        return f"{self.size} : {self.id}"
+        return f"{self.size} : {self._id}"
 
 
 class Category(models.Model):
@@ -23,7 +23,7 @@ class Category(models.Model):
     updated_at = models.DateTimeField(blank=True)
 
     def __str__(self):
-        return f"{self.name} : {self.id}"
+        return f"{self.name} : {self._id}"
 
 
 class Product(models.Model):
@@ -38,17 +38,17 @@ class Product(models.Model):
     updated_at = models.DateTimeField(blank=True)
 
     def __str__(self):
-        return f"{self.name} : {self.id}"
+        return f"{self.name} : {self._id}"
 
 class Sale(models.Model):
     product = models.OneToOneField(
-        to=Product, to_field='id', on_delete=models.CASCADE, null=True)
+        to=Product, to_field='_id', on_delete=models.CASCADE, null=True)
     price = models.IntegerField(blank=False)
     start_date = models.DateTimeField(blank=False)
     end_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.start_date} : {self.id} : {self.end_date}"
+        return f"{self.start_date} : {self._id} : {self.end_date}"
 
 
 class Customer(models.Model):
@@ -65,7 +65,7 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(blank=True)
 
     def __str__(self):
-        return f"{self.first_name} - {self.last_name} : {self.id}"
+        return f"{self.first_name} - {self.last_name} : {self._id}"
 
 
 class Order(models.Model):
@@ -77,7 +77,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order {self.created_by} : {self.id}"
+        return f"Order {self.created_by} : {self._id}"
 
 
 class OrderItem(models.Model):
