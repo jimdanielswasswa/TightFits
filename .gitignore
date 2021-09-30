@@ -3,3 +3,4 @@ djangoenv/
 urbanshop/db.sqlite3
 */__pycache__/
 *.pyc
+tightfits.env
